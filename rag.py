@@ -57,7 +57,7 @@ class RAGSystem:
     def _get_documents_hash(self):
         """计算文档目录的哈希值"""
         hasher = hashlib.sha256()
-        for root, _, files in os.walk("./testdata"):
+        for root, _, files in os.walk("./data"):
             for file in files:
                 with open(os.path.join(root, file), "rb") as f:
                     hasher.update(f.read())
@@ -86,7 +86,7 @@ class RAGSystem:
             os.makedirs(storage_dir, exist_ok=True)
 
             # 构建新索引
-            documents = SimpleDirectoryReader(input_dir="./testdata").load_data()
+            documents = SimpleDirectoryReader(input_dir="./data").load_data()
             index = VectorStoreIndex.from_documents(documents)
 
             # 保存索引和哈希
